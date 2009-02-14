@@ -1,0 +1,33 @@
+#-*- makefile -*-
+
+BIN=$(DEVKIT)/bin/arm-open2x-linux
+
+CFLAGS=-I/usr/include/SDL -I/usr/local/include/SDL \
+	-g -Wall
+LDFLAGS=-lSDL_image -lSDL -lpthread -lpng -lz -llua5.1 -lm
+CC=gcc
+AR=ar rcu
+RANLIB=ranlib
+STRIP=strip
+BUILDDIR=build/linux
+
+LIB_O=$(BUILDDIR)/ui.o $(BUILDDIR)/graphics.o \
+	$(BUILDDIR)/gplua2x.o
+
+include Makefile.common
+
+all: $(BUILDDIR)/luatests $(BUILDDIR)/libgplua2x.a $(BUILDDIR)/libtests \
+	$(BUILDDIR)/gplua2xrun
+
+$(BUILDDIR)/libgplua2x.a: $(LIB_O)
+	$(AR) $@ $^
+	$(RANLIB) $@
+
+$(BUILDDIR)/luatests: $(OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(BUILDDIR)/libtests: $(BUILDDIR)/libtests.o $(BUILDDIR)/libgplua2x.a
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(BUILDDIR)/gplua2xrun: $(BUILDDIR)/gplua2xrun.o $(BUILDDIR)/libgplua2x.a
+	$(CC) -o $@ $^ $(LDFLAGS)

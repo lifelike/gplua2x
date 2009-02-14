@@ -1,0 +1,9 @@
+#-*- makefile -*-
+
+$(BUILDDIR)/%.o: %.c
+	mkdir -p $(BUILDDIR)
+	$(CC) $(CFLAGS) -o $@ -c $^
+
+LIBOBJ=$(BUILDDIR)/ui.o $(BUILDDIR)/graphics.o
+
+OBJ=$(BUILDDIR)/luatests.o $(LIBOBJ)

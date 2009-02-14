@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+<title>GpLua2x</title>
+</head>
+<body>
+<h1>GpLua2x</h1>
+
+<h2>Introduction</h2>
+<p>GpLua2x is a port of the
+<a href="http://www.lua.org">Lua scripting language</a>,
+including a small wrapper to access some functions of
+<a href="http://www.libsdl.org/">SDL</a>, for the
+<a href="http://www.gp2x.co.uk">GP2x</a>.</p>
+
+<h2>Download</h2>
+<p><a href="http://pelle-n.net/gplua2x/gplua2x-VERSION.tar.gz"
+>gplua2x-VERSION.tar.gz</a></p>
+
+<h2>Lua Interpreter</h2>
+<p>The binary gplua2xrun can be used to run stand-alone Lua
+applications/games on the GP2x.
+
+<h2>Embedded Lua</h2> 
+<p>If you just want to use Lua to do some scripting within an
+application mainly written in C or C++, you can link with the
+included liblua.a for GP2x. For testing on your development
+system an ordinary Lua 5.1 installation can be used instead.
+If you use some of the functions of the SDL wrapper you also
+need to link with libsdl and libsdl-image from the
+<a href="http://www.open2x.org/open2x/index.html">open2x project</a>.</p>
+
+<h2>Compiling for Linux</h2>
+<p>To compile for a Linux development host, you need to have
+development libraries for Lua 5.1, SDL 1.2 and SDL-image 1.2 installed.
+Run <code>make linux</code>.
+</p>
+
+<h2>Compiling for FreeBSD</h2>
+<p>Similar to if you want to develop on Linux, for FreeBSD you need
+to install the ports of Lua 5.1, SDL 1.2, and SDL-image 1.2, then
+compile using <code>gmake freebsd</code>.</p>
+
+<h2>Compiling for GP2x</h2>
+<p> Compilation for
+the GP2x is easiest to do with the included Makefile and
+the toolchain and libraries from the
+<a href="http://www.open2x.org/open2x/index.html">open2x project</a>,
+and the
+<a href="http://www.lua.org/ftp/lua-5.1.2.tar.gz">source for Lua 5.1.2</a>.
+The Lua sources should be placed in a directory called <code>lua</code>
+in the directory with the gplua2x files.
+You need to patch Lua using the included diff file to make it compile
+properly for the GP2x. Run <code>make gp2x</code>. Note that binaries
+for the GP2x are included. There is no need to compile your own unless
+you modify the source (gplua2x.c and related files, or Lua itself).
+</p>
+
+<h2>Copyright</h2>
+<p>GpLua2x is copyright 2008 Pelle Nilsson, and may be distributed
+under the same open source MIT license used by Lua itself:</p>
+
+<code>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</code>
+
+<address>
+<a href="gplua2x@pelle-n.net">Pelle Nilsson</a>.
+</address>
+</body>
+</html>

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./gplua2xrun looptest.lua

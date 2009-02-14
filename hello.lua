@@ -1,0 +1,1 @@
+io.write("hello gp2x!\n")

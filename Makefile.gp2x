@@ -1,0 +1,47 @@
+#-*- makefile -*-
+
+DEVKIT=/opt/open2x/gcc-4.1.1-glibc-2.3.6/
+BIN=$(DEVKIT)/bin/arm-open2x-linux
+
+LDFLAGS=-Lbuild/gp2x -L$(DEVKIT)/lib -static \
+	-lSDL_image -lSDL -lpthread -lpng -lz -llua -lgplua2x -lm -ldl
+CC=$(BIN)-gcc
+AR=$(BIN)-ar rcu
+RANLIB=$(BIN)-ranlib
+STRIP=$(BIN)-strip
+CFLAGS=-I$(DEVKIT)/include -I$(DEVKIT)/include/SDL \
+	-DGP2X -O -Wall
+
+BUILDDIR=build/gp2x
+LIB_O=$(BUILDDIR)/ui.o $(BUILDDIR)/graphics.o \
+	$(BUILDDIR)/gplua2x.o
+
+all:  $(BUILDDIR)/libgplua2x.a \
+	$(BUILDDIR)/gplua2xrun
+
+lua/src/liblua.a:
+	$(MAKE) -C lua
+
+$(BUILDDIR)/liblua.a: lua/src/liblua.a
+	cp $< $@
+
+$(BUILDDIR)/libgplua2x.a: $(LIB_O)
+	$(AR) $@ $^
+	$(RANLIB) $@
+
+$(BUILDDIR)/%.o: %.c
+	mkdir -p $(BUILDDIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+$(BUILDDIR)/luatests.gpe: $(BUILDDIR)/luatests.o $(BUILDDIR)/liblua.a $(LIB_O)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(BUILDDIR)/libtests.gpe: $(BUILDDIR)/libtests.o $(BUILDDIR)/liblua.a \
+	$(BUILDDIR)/libgplua2x.a
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(BUILDDIR)/gplua2xrun: $(BUILDDIR)/gplua2xrun.o $(BUILDDIR)/liblua.a \
+	$(BUILDDIR)/libgplua2x.a
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+%PHONY: lua/src/liblua.a
