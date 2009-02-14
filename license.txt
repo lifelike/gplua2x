@@ -2,8 +2,8 @@ This (MIT) license applies to all files included with gplua2x, including Lua
 itself (see lua/COPYRIGHT for details on that).
 
 Most of the gplua2x binaries (including the libgplua2x.a library) are
-per default statically linked to the Simple Direct Media Library
-(SDL), released under the Lesser GNU Public License. If you
+per default statically linked to the Simple DirectMedia Layer library
+(SDL), available under the Lesser GNU Public License. If you
 redistribute one of those binaries you need to make sure that you
 comply with that license as well:
 http://www.libsdl.org/license-lgpl.php
