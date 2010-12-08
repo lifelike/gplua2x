@@ -5,6 +5,8 @@
 #include <lua5.1/lua.h>
 #elif FREEBSD
 #include <lua51/lua.h>
+#elif MACOSX
+#include <lua.h>
 #else
 #include <lua5.1/lua.h>
 #endif

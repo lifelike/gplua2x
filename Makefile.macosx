@@ -1,0 +1,32 @@
+#-*- makefile -*-
+
+# Compiling on my iMac (Lua and SDL from MacPorts)
+
+CFLAGS=`sdl-config --cflags` -I/opt/local/include -DMACOSX -g -Wall
+LDFLAGS=-L/opt/local/lib `sdl-config --libs` -lSDL_Image -lpthread -lpng -lz -llua -lm
+CC=gcc
+AR=ar rcu
+RANLIB=ranlib
+STRIP=strip
+BUILDDIR=build/macosx
+
+LIB_O=$(BUILDDIR)/ui.o $(BUILDDIR)/graphics.o \
+	$(BUILDDIR)/gplua2x.o
+
+include Makefile.common
+
+all: $(BUILDDIR)/luatests $(BUILDDIR)/libgplua2x.a $(BUILDDIR)/libtests \
+	$(BUILDDIR)/gplua2xrun
+
+$(BUILDDIR)/libgplua2x.a: $(LIB_O)
+	$(AR) $@ $^
+	$(RANLIB) $@
+
+$(BUILDDIR)/luatests: $(OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(BUILDDIR)/libtests: $(BUILDDIR)/libtests.o $(BUILDDIR)/libgplua2x.a
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(BUILDDIR)/gplua2xrun: $(BUILDDIR)/gplua2xrun.o $(BUILDDIR)/libgplua2x.a
+	$(CC) -o $@ $^ $(LDFLAGS)

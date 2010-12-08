@@ -1,6 +1,9 @@
 linux:
 	$(MAKE) -f Makefile.linux
 
+macosx:
+	gnumake -f Makefile.macosx
+
 freebsd:
 	gmake -f Makefile.freebsd
 

@@ -9,6 +9,10 @@
 #include <lua5.1/lua.h>
 #include <lua5.1/lauxlib.h>
 #include <lua5.1/lualib.h>
+#elif MACOSX
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
 #elif FREEBSD
 #include <lua51/lua.h>
 #include <lua51/lauxlib.h>

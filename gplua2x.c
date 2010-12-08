@@ -12,6 +12,9 @@
 #elif FREEBSD
 #include <lua51/lauxlib.h>
 #include <lua51/lualib.h>
+#elif MACOSX
+#include <lauxlib.h>
+#include <lualib.h>
 #else
 #include <lua5.1/lauxlib.h>
 #include <lua5.1/lualib.h>
